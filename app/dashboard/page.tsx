@@ -9,6 +9,12 @@ import { FileText, Home, User, MessageSquare, Phone, PlusCircle, CheckCircle, Cl
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import {
+    Tooltip,
+    TooltipTrigger,
+    TooltipContent,
+    TooltipProvider,
+  } from "@/components/ui/tooltip";
 
 export default function Dashboard() {
     const router = useRouter();
@@ -82,8 +88,8 @@ export default function Dashboard() {
         return <CheckCircle className="h-5 w-5 text-green-500" />;
       case 'in-progress':
         return <Clock className="h-5 w-5 text-yellow-500" />;
-      case 'rejected':
-        return <XCircle className="h-5 w-5 text-red-500" />;
+      case 'approved':
+        return <CheckCircle className="h-5 w-5 text-red-500" />;
       default:
         return <Clock className="h-5 w-5 text-gray-500" />;
     }
@@ -167,19 +173,55 @@ export default function Dashboard() {
                       <SelectValue placeholder="Select category" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="road_damage">Road Damage</SelectItem>
-                      <SelectItem value="water_leakage">Water Leakage</SelectItem>
-                      <SelectItem value="garbage_collection">Garbage Collection</SelectItem>
-                      <SelectItem value="street_lights">Street Lights</SelectItem>
-                      <SelectItem value="traffic_signals">Traffic Signals</SelectItem>
-                      <SelectItem value="illegal_construction">Illegal Construction</SelectItem>
-                      <SelectItem value="sewage_issues">Sewage Issues</SelectItem>
-                      <SelectItem value="noise_pollution">Noise Pollution</SelectItem>
-                      <SelectItem value="harassment">Harassment</SelectItem>
-                      <SelectItem value="discrimination">Discrimination</SelectItem>
-                      <SelectItem value="fraud">Fraud</SelectItem>
-                      <SelectItem value="telecom_issues">Internet & Telecom Issues</SelectItem>
-                    </SelectContent>
+  <SelectItem value="road_damage" className="border-l-4 border-red-500 pl-3">
+    <span className="text-red-600">Road Damage</span>
+  </SelectItem>
+
+  <SelectItem value="water_leakage" className="border-l-4 border-blue-500 pl-3">
+    <span className="text-blue-600">Water Leakage</span>
+  </SelectItem>
+
+  <SelectItem value="garbage_collection" className="border-l-4 border-green-500 pl-3">
+    <span className="text-green-600">Garbage Collection</span>
+  </SelectItem>
+
+  <SelectItem value="street_lights" className="border-l-4 border-yellow-500 pl-3">
+    <span className="text-yellow-600">Street Lights</span>
+  </SelectItem>
+
+  <SelectItem value="traffic_signals" className="border-l-4 border-orange-500 pl-3">
+    <span className="text-orange-600">Traffic Signals</span>
+  </SelectItem>
+
+  <SelectItem value="illegal_construction" className="border-l-4 border-purple-500 pl-3">
+    <span className="text-purple-600">Illegal Construction</span>
+  </SelectItem>
+
+  <SelectItem value="sewage_issues" className="border-l-4 border-teal-500 pl-3">
+    <span className="text-teal-600">Sewage Issues</span>
+  </SelectItem>
+
+  <SelectItem value="noise_pollution" className="border-l-4 border-pink-500 pl-3">
+    <span className="text-pink-600">Noise Pollution</span>
+  </SelectItem>
+
+  <SelectItem value="harassment" className="border-l-4 border-rose-500 pl-3">
+    <span className="text-rose-600">Harassment</span>
+  </SelectItem>
+
+  <SelectItem value="discrimination" className="border-l-4 border-indigo-500 pl-3">
+    <span className="text-indigo-600">Discrimination</span>
+  </SelectItem>
+
+  <SelectItem value="fraud" className="border-l-4 border-amber-500 pl-3">
+    <span className="text-amber-600">Fraud</span>
+  </SelectItem>
+
+  <SelectItem value="telecom_issues" className="border-l-4 border-cyan-500 pl-3">
+    <span className="text-cyan-600">Internet & Telecom Issues</span>
+  </SelectItem>
+</SelectContent>
+
                   </Select>
                 </div>
 
@@ -250,33 +292,84 @@ export default function Dashboard() {
                 <SelectValue placeholder="Category" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="Road Damage">Road Damage</SelectItem>
-                <SelectItem value="Water Leakage">Water Leakage</SelectItem>
-                <SelectItem value="Garbage Collection">Garbage Collection</SelectItem>
-                <SelectItem value="Street Lights">Street Lights</SelectItem>
-                <SelectItem value="Traffic Signals">Traffic Signals</SelectItem>
-                <SelectItem value="Illegal Construction">Illegal Construction</SelectItem>
-                <SelectItem value="Sewage Issues">Sewage Issues</SelectItem>
-                <SelectItem value="Noise Pollution">Noise Pollution</SelectItem>
-                <SelectItem value="Harassment">Harassment</SelectItem>
-                <SelectItem value="Discrimination">Discrimination</SelectItem>
-                <SelectItem value="Fraud">Fraud</SelectItem>
-                <SelectItem value="Internet & Telecom Issues">Internet & Telecom Issues</SelectItem>
-              </SelectContent>
+                <SelectItem value="road_damage" className="border-l-4 border-red-500 pl-3">
+                    <span className="text-red-600">Road Damage</span>
+                </SelectItem>
+
+                <SelectItem value="water_leakage" className="border-l-4 border-blue-500 pl-3">
+                    <span className="text-blue-600">Water Leakage</span>
+                </SelectItem>
+
+                <SelectItem value="garbage_collection" className="border-l-4 border-green-500 pl-3">
+                    <span className="text-green-600">Garbage Collection</span>
+                </SelectItem>
+
+                <SelectItem value="street_lights" className="border-l-4 border-yellow-500 pl-3">
+                    <span className="text-yellow-600">Street Lights</span>
+                </SelectItem>
+
+                <SelectItem value="traffic_signals" className="border-l-4 border-orange-500 pl-3">
+                    <span className="text-orange-600">Traffic Signals</span>
+                </SelectItem>
+
+                <SelectItem value="illegal_construction" className="border-l-4 border-purple-500 pl-3">
+                    <span className="text-purple-600">Illegal Construction</span>
+                </SelectItem>
+
+                <SelectItem value="sewage_issues" className="border-l-4 border-teal-500 pl-3">
+                    <span className="text-teal-600">Sewage Issues</span>
+                </SelectItem>
+
+                <SelectItem value="noise_pollution" className="border-l-4 border-pink-500 pl-3">
+                    <span className="text-pink-600">Noise Pollution</span>
+                </SelectItem>
+
+                <SelectItem value="harassment" className="border-l-4 border-rose-500 pl-3">
+                    <span className="text-rose-600">Harassment</span>
+                </SelectItem>
+
+                <SelectItem value="discrimination" className="border-l-4 border-indigo-500 pl-3">
+                    <span className="text-indigo-600">Discrimination</span>
+                </SelectItem>
+
+                <SelectItem value="fraud" className="border-l-4 border-amber-500 pl-3">
+                    <span className="text-amber-600">Fraud</span>
+                </SelectItem>
+
+                <SelectItem value="telecom_issues" className="border-l-4 border-cyan-500 pl-3">
+                    <span className="text-cyan-600">Internet & Telecom Issues</span>
+                </SelectItem>
+                </SelectContent>
+
             </Select>
             <Select>
               <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder="Status" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">All Status</SelectItem>
-                <SelectItem value="pending">pending</SelectItem>
-                <SelectItem value="in-progress">in-progress</SelectItem>
-                <SelectItem value="approved">approved</SelectItem>
-                <SelectItem value="completed">completed</SelectItem>
-              </SelectContent>
+                <SelectItem value="all" className="border-l-4 border-gray-400 pl-3">
+                    <span className="text-gray-600">All Status</span>
+                </SelectItem>
+
+                <SelectItem value="pending" className="border-l-4 border-yellow-500 pl-3">
+                    <span className="text-yellow-600">Pending</span>
+                </SelectItem>
+
+                <SelectItem value="in-progress" className="border-l-4 border-blue-500 pl-3">
+                    <span className="text-blue-600">In Progress</span>
+                </SelectItem>
+
+                <SelectItem value="approved" className="border-l-4 border-green-500 pl-3">
+                    <span className="text-green-600">Approved</span>
+                </SelectItem>
+
+                <SelectItem value="completed" className="border-l-4 border-emerald-500 pl-3">
+                    <span className="text-emerald-600">Completed</span>
+                </SelectItem>
+                </SelectContent>
+
             </Select>
-            <Input className="w-[200px]" placeholder="Search complaints..." />
+            <Input className="w-[180px]" placeholder="Filter by location" />
           </div>
 
           {/* Complaints List */}
