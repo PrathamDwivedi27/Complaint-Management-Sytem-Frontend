@@ -1,3 +1,34 @@
+// "use client"
+
+// import { DashboardLayout } from "@/components/dashboard/dashboard-layout"
+// import { StatsCards } from "@/components/dashboard/stats-cards"
+// // import { ComplaintFilters } from "@/components/dashboard/complaint-filters"
+// import { ComplaintsList } from "@/components/complaints-list"
+// import { NewComplaintButton } from "@/components/dashboard/new-complaint"
+
+// export default function Dashboard() {
+//   return (
+//     <DashboardLayout>
+//       <div className="max-w-6xl mx-auto">
+//         {/* Header */}
+//         <div className="flex justify-between items-center mb-8">
+//           <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
+//           <NewComplaintButton />
+//         </div>
+
+//         {/* Stats */}
+//         <StatsCards />
+
+//         {/* Filters */}
+//         {/* <ComplaintFilters /> */}
+
+//         {/* Complaints List */}
+//         <ComplaintsList />
+//       </div>
+//     </DashboardLayout>
+//   )
+// }
+
 'use client';
 
 import { Button } from "@/components/ui/button";
@@ -131,7 +162,7 @@ export default function Dashboard() {
           {/* Header */}
           <div className="flex justify-between items-center mb-8">
             <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
-            <Dialog>
+            {/* <Dialog>
             <DialogTrigger asChild>
               <Button className="bg-sky-600 hover:bg-sky-700 text-white">
                 <PlusCircle className="h-5 w-5 mr-1" />
@@ -241,7 +272,7 @@ export default function Dashboard() {
                 </Button>
               </form>
             </DialogContent>
-          </Dialog>
+          </Dialog> */}
           </div>
 
           {/* Stats */}
@@ -370,6 +401,120 @@ export default function Dashboard() {
 
             </Select>
             <Input className="w-[180px]" placeholder="Filter by location" />
+             <div className="ml-auto">
+             <Dialog>
+            <DialogTrigger asChild>
+              <Button className="bg-sky-600 hover:bg-sky-700 text-white">
+                <PlusCircle className="h-5 w-5 mr-1" />
+                File New Complaint
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[425px]">
+              <DialogHeader>
+                <DialogTitle>File New Complaint</DialogTitle>
+              </DialogHeader>
+
+              <form onSubmit={handleSubmit} className="grid gap-4 py-4">
+                <div className="grid gap-2">
+                  <label htmlFor="title">Title</label>
+                  <Input
+                    id="title"
+                    placeholder="Enter complaint title"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    required
+                  />
+                </div>
+
+                <div className="grid gap-2">
+                  <label htmlFor="description">Description</label>
+                  <Input
+                    id="description"
+                    placeholder="Describe your complaint"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    required
+                  />
+                </div>
+
+                <div className="grid gap-2">
+                  <label htmlFor="category">Category</label>
+                  <Select value={category} onValueChange={(val) => setCategory(val)} required>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select category" />
+                    </SelectTrigger>
+                    <SelectContent>
+  <SelectItem value="road_damage" className="border-l-4 border-red-500 pl-3">
+    <span className="text-red-600">Road Damage</span>
+  </SelectItem>
+
+  <SelectItem value="water_leakage" className="border-l-4 border-blue-500 pl-3">
+    <span className="text-blue-600">Water Leakage</span>
+  </SelectItem>
+
+  <SelectItem value="garbage_collection" className="border-l-4 border-green-500 pl-3">
+    <span className="text-green-600">Garbage Collection</span>
+  </SelectItem>
+
+  <SelectItem value="street_lights" className="border-l-4 border-yellow-500 pl-3">
+    <span className="text-yellow-600">Street Lights</span>
+  </SelectItem>
+
+  <SelectItem value="traffic_signals" className="border-l-4 border-orange-500 pl-3">
+    <span className="text-orange-600">Traffic Signals</span>
+  </SelectItem>
+
+  <SelectItem value="illegal_construction" className="border-l-4 border-purple-500 pl-3">
+    <span className="text-purple-600">Illegal Construction</span>
+  </SelectItem>
+
+  <SelectItem value="sewage_issues" className="border-l-4 border-teal-500 pl-3">
+    <span className="text-teal-600">Sewage Issues</span>
+  </SelectItem>
+
+  <SelectItem value="noise_pollution" className="border-l-4 border-pink-500 pl-3">
+    <span className="text-pink-600">Noise Pollution</span>
+  </SelectItem>
+
+  <SelectItem value="harassment" className="border-l-4 border-rose-500 pl-3">
+    <span className="text-rose-600">Harassment</span>
+  </SelectItem>
+
+  <SelectItem value="discrimination" className="border-l-4 border-indigo-500 pl-3">
+    <span className="text-indigo-600">Discrimination</span>
+  </SelectItem>
+
+  <SelectItem value="fraud" className="border-l-4 border-amber-500 pl-3">
+    <span className="text-amber-600">Fraud</span>
+  </SelectItem>
+
+  <SelectItem value="telecom_issues" className="border-l-4 border-cyan-500 pl-3">
+    <span className="text-cyan-600">Internet & Telecom Issues</span>
+  </SelectItem>
+</SelectContent>
+
+                  </Select>
+                </div>
+
+                <div className="grid gap-2">
+                  <label htmlFor="location">Location</label>
+                  <Input
+                    id="location"
+                    placeholder="Enter location"
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
+                    required
+                  />
+                </div>
+
+                <Button type="submit" className="w-full bg-sky-600 hover:bg-sky-700">
+                  Submit Complaint
+                </Button>
+              </form>
+            </DialogContent>
+          </Dialog>
+             </div>
+            
           </div>
 
           {/* Complaints List */}
@@ -434,3 +579,4 @@ export default function Dashboard() {
     </div>
   );
 }
+
