@@ -7,8 +7,45 @@ import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { FileText, Home, User, MessageSquare, Phone, PlusCircle, CheckCircle, Clock, XCircle, Filter } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function Dashboard() {
+    const router = useRouter();
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [category, setCategory] = useState("");
+  const [location, setLocation] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const complaintData = {
+      title,
+      description,
+      category,
+      location,
+    };
+
+    try {
+      const res = await fetch("/api/complaints", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(complaintData),
+      });
+
+      if (res.ok) {
+        router.refresh(); // or router.push() if you want to navigate
+      } else {
+        console.error("Failed to submit complaint");
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const complaints = [
     {
       id: 1,
@@ -89,46 +126,80 @@ export default function Dashboard() {
           <div className="flex justify-between items-center mb-8">
             <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
             <Dialog>
-              <DialogTrigger asChild>
-                <Button className="bg-sky-600 hover:bg-sky-700 text-white">
-                  <PlusCircle className="h-5 w-5 mr-1" />
-                  File New Complaint
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-[425px]">
-                <DialogHeader>
-                  <DialogTitle>File New Complaint</DialogTitle>
-                </DialogHeader>
-                <div className="grid gap-4 py-4">
-                  <div className="grid gap-2">
-                    <label htmlFor="title">Title</label>
-                    <Input id="title" placeholder="Enter complaint title" />
-                  </div>
-                  <div className="grid gap-2">
-                    <label htmlFor="category">Category</label>
-                    <Select>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select category" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="utilities">Utilities</SelectItem>
-                        <SelectItem value="infrastructure">Infrastructure</SelectItem>
-                        <SelectItem value="sanitation">Sanitation</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div className="grid gap-2">
-                    <label htmlFor="description">Description</label>
-                    <Input id="description" placeholder="Describe your complaint" />
-                  </div>
-                  <div className="grid gap-2">
-                    <label htmlFor="location">Location</label>
-                    <Input id="location" placeholder="Enter location" />
-                  </div>
+            <DialogTrigger asChild>
+              <Button className="bg-sky-600 hover:bg-sky-700 text-white">
+                <PlusCircle className="h-5 w-5 mr-1" />
+                File New Complaint
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[425px]">
+              <DialogHeader>
+                <DialogTitle>File New Complaint</DialogTitle>
+              </DialogHeader>
+
+              <form onSubmit={handleSubmit} className="grid gap-4 py-4">
+                <div className="grid gap-2">
+                  <label htmlFor="title">Title</label>
+                  <Input
+                    id="title"
+                    placeholder="Enter complaint title"
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    required
+                  />
                 </div>
-                <Button className="w-full bg-sky-600 hover:bg-sky-700">Submit Complaint</Button>
-              </DialogContent>
-            </Dialog>
+
+                <div className="grid gap-2">
+                  <label htmlFor="description">Description</label>
+                  <Input
+                    id="description"
+                    placeholder="Describe your complaint"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    required
+                  />
+                </div>
+
+                <div className="grid gap-2">
+                  <label htmlFor="category">Category</label>
+                  <Select value={category} onValueChange={(val) => setCategory(val)} required>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select category" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="road_damage">Road Damage</SelectItem>
+                      <SelectItem value="water_leakage">Water Leakage</SelectItem>
+                      <SelectItem value="garbage_collection">Garbage Collection</SelectItem>
+                      <SelectItem value="street_lights">Street Lights</SelectItem>
+                      <SelectItem value="traffic_signals">Traffic Signals</SelectItem>
+                      <SelectItem value="illegal_construction">Illegal Construction</SelectItem>
+                      <SelectItem value="sewage_issues">Sewage Issues</SelectItem>
+                      <SelectItem value="noise_pollution">Noise Pollution</SelectItem>
+                      <SelectItem value="harassment">Harassment</SelectItem>
+                      <SelectItem value="discrimination">Discrimination</SelectItem>
+                      <SelectItem value="fraud">Fraud</SelectItem>
+                      <SelectItem value="telecom_issues">Internet & Telecom Issues</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div className="grid gap-2">
+                  <label htmlFor="location">Location</label>
+                  <Input
+                    id="location"
+                    placeholder="Enter location"
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
+                    required
+                  />
+                </div>
+
+                <Button type="submit" className="w-full bg-sky-600 hover:bg-sky-700">
+                  Submit Complaint
+                </Button>
+              </form>
+            </DialogContent>
+          </Dialog>
           </div>
 
           {/* Stats */}
@@ -179,10 +250,18 @@ export default function Dashboard() {
                 <SelectValue placeholder="Category" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">All Categories</SelectItem>
-                <SelectItem value="utilities">Utilities</SelectItem>
-                <SelectItem value="infrastructure">Infrastructure</SelectItem>
-                <SelectItem value="sanitation">Sanitation</SelectItem>
+                <SelectItem value="Road Damage">Road Damage</SelectItem>
+                <SelectItem value="Water Leakage">Water Leakage</SelectItem>
+                <SelectItem value="Garbage Collection">Garbage Collection</SelectItem>
+                <SelectItem value="Street Lights">Street Lights</SelectItem>
+                <SelectItem value="Traffic Signals">Traffic Signals</SelectItem>
+                <SelectItem value="Illegal Construction">Illegal Construction</SelectItem>
+                <SelectItem value="Sewage Issues">Sewage Issues</SelectItem>
+                <SelectItem value="Noise Pollution">Noise Pollution</SelectItem>
+                <SelectItem value="Harassment">Harassment</SelectItem>
+                <SelectItem value="Discrimination">Discrimination</SelectItem>
+                <SelectItem value="Fraud">Fraud</SelectItem>
+                <SelectItem value="Internet & Telecom Issues">Internet & Telecom Issues</SelectItem>
               </SelectContent>
             </Select>
             <Select>
@@ -191,9 +270,10 @@ export default function Dashboard() {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">All Status</SelectItem>
-                <SelectItem value="pending">Pending</SelectItem>
-                <SelectItem value="in-progress">In Progress</SelectItem>
-                <SelectItem value="completed">Completed</SelectItem>
+                <SelectItem value="pending">pending</SelectItem>
+                <SelectItem value="in-progress">in-progress</SelectItem>
+                <SelectItem value="approved">approved</SelectItem>
+                <SelectItem value="completed">completed</SelectItem>
               </SelectContent>
             </Select>
             <Input className="w-[200px]" placeholder="Search complaints..." />
