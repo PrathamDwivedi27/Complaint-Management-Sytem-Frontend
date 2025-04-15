@@ -7,6 +7,10 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
   title: 'ComplaintCare - Efficient Complaint Management System',
   description: 'A modern complaint management system for efficient resolution of issues',
+  icons:{
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+  }
 };
 
 export default function RootLayout({
