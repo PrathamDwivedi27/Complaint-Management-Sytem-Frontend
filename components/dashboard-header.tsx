@@ -1,14 +1,13 @@
 import { Bell } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
-import { SidebarTrigger } from "@/components/ui/sidebar"
 
 export function DashboardHeader() {
   return (
     <header className="h-16 border-b bg-white flex items-center px-4 sticky top-0 z-10">
       <div className="flex items-center gap-2">
         {/* <SidebarTrigger /> */}
-        <h1 className="text-2xl font-semibold">Complaints Dashboard</h1>
+        <h1 className="text-2xl font-semibold">Admin Dashboard</h1>
       </div>
       <div className="ml-auto flex items-center gap-2">
         <Button variant="outline" size="icon">

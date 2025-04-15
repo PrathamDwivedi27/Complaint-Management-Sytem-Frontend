@@ -163,7 +163,7 @@ export function ComplaintsList() {
       <div className="grid gap-4">
         {filteredComplaints.map((complaint) => (
           <Card key={complaint.id} className="overflow-hidden">
-            <CardHeader className="bg-sky-50 pb-2">
+            <CardHeader className=" pb-2">
               <div className="flex justify-between items-start">
                 <CardTitle className="text-lg font-medium">{complaint.title}</CardTitle>
                 <div className="flex items-center gap-1 text-amber-600 bg-amber-50 px-2 py-1 rounded-full text-xs">
