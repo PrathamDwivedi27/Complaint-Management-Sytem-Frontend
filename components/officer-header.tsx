@@ -10,7 +10,7 @@ export function OfficerHeader() {
         {/* <SidebarTrigger /> */}
         <h1 className="text-2xl font-semibold">Officer Dashboard</h1>
       </div>
-      <div className="ml-190 flex items-center gap-2">
+      <div className="ml-170 flex items-center gap-2">
         <Button variant="outline" size="icon">
           <Bell className="h-5 w-5" />
         </Button>
